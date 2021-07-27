@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New group</title>
+</head>
+<body>
+
+<table border="4" align="center">
+  <td>
+    <form action="#"
+          th:action="@{add_group}"
+          th:object="${group}"
+          method="post">
+      <label for="id" >id</label>
+      <input type="text" th:field="*{id}" Id="id" placeholder="Id">
+      <label for="token" >Token</label>
+      <input type="text" th:field="*{token}" id="token" placeholder="Token">
+      <br><br><label for="name" >Name</label>
+      <input type="text" th:field="*{name}" id="name" placeholder="Name">
+    <a align="center"><input type="submit" value="Add"/></a>
+
+
+    </form>
+  </td>
+</table>
+
+
+</p>
+
+
+</body>
+</html>

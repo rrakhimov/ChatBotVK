@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vk Chatbot</title>
+    <style>
+        table th, table td {
+            padding: 5px;
+        }
+
+        .row {
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Vk Chatbot</h1>
+<h3>Groups</h3>
+
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Start</th>
+    </tr>
+
+    <tr th:each="group, state : ${groups}"
+        class="row" th:classappend="${state.odd} ? 'odd-row' : 'even-row'">
+
+        <td th:utext="${group.getId()}">Id</td>
+        <td th:utext="${group.getName()}">Name</td>
+        <td><a th:href="${'/groups/delete?id=' + group.id}">delete</a></td>
+        <td><a th:href="${'/groups/start?id=' + group.id}">start</a></td>
+
+    </tr>
+
+</table>
+<a href="/groups/new">Add new Group</a>
+
+</body>
+</html>
