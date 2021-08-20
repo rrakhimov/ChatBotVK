@@ -5,6 +5,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 @Service
 public class KafkaKeyboardConsumer implements KeyboardConsumer{
@@ -14,12 +15,11 @@ public class KafkaKeyboardConsumer implements KeyboardConsumer{
     @KafkaListener(topics="all_keyboards")
     public void orderListener(ConsumerRecord<Long, List<MyKeyboard>> record){
         keyboardList = record.value();
-        System.out.println(keyboardList);
-        System.out.println(keyboardList.get(1));
     }
 
     @Override
     public List<MyKeyboard> getKeyboardsList() {
+
         return keyboardList;
     }
 }

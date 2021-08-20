@@ -39,4 +39,13 @@ public class MyKeyboard {
     public void setResponce(String responce) {
         this.responce = responce;
     }
+
+    @Override
+    public String toString() {
+        return "MyKeyboard{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", responce='" + responce + '\'' +
+                '}';
+    }
 }

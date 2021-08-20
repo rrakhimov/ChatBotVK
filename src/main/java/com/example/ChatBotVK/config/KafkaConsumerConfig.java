@@ -1,7 +1,11 @@
 package com.example.ChatBotVK.config;
 
 import com.example.ChatBotVK.model.MyKeyboard;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.LongDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,7 +51,14 @@ public class KafkaConsumerConfig {
 
     @Bean
     public ConsumerFactory<Long, List<MyKeyboard>> consumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(consumerConfigs());
+        return new DefaultKafkaConsumerFactory<>(consumerConfigs(), new LongDeserializer(),
+                kafkaDeserializer());
+    }
+
+    protected Deserializer<List<MyKeyboard>> kafkaDeserializer() {
+        ObjectMapper om = new ObjectMapper();
+        JavaType type = om.getTypeFactory().constructParametricType(List.class, MyKeyboard.class);
+        return new JsonDeserializer<>(type, om, false);
     }
 }
 

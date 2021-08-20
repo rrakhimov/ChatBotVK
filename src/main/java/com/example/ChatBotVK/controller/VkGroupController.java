@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.RequestDispatcher;
@@ -30,7 +31,8 @@ public class VkGroupController {
     @ApiOperation(value = "Добаdляет в модель все группы и возвращает groups.html")
     @GetMapping("/groups")
     public String allGroups(Model model){
-        List<VkGroup> groups = vkGroupService.getAllGroups();
+
+                List<VkGroup> groups = vkGroupService.getAllGroups();
         model.addAttribute("groups", groups);
 
         return "groups";
@@ -48,7 +50,9 @@ public class VkGroupController {
             @Override
             public void run() {
                 try {
+                    System.out.println("Starting..");
                     vkGroupService.startBot(id);
+
                 } catch (ClientException | ApiException | InterruptedException e) {
                     e.printStackTrace();
                 }
